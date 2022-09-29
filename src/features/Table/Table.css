@@ -1,0 +1,33 @@
+.tableCont{
+    width: 1300px;
+}
+.tableExactly{
+    width: 100%;
+}
+.row{
+    background: inherit;
+}
+table{
+    border-spacing: 0 0.5rem !important;
+    font-weight: bold;
+    font-size: 15px;
+}
+.buyButton{
+    border-radius: 5px !important;
+    color: mediumpurple !important;
+    border: 2px solid mediumpurple !important;
+    font-weight: bold !important;
+}
+.buyButton:hover{
+    background: mediumpurple !important;
+    color: #fff !important;
+}
+.conditionSpan{
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+.conditionSpan div{
+    margin-right: 3px;
+    padding-bottom: 2px;
+}

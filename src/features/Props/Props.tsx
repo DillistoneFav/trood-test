@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Props.css'
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {IItem} from "../../app/Interfaces/IItem";
+import {IProgressBarItem} from "../../app/Interfaces/IProgressBarItem";
 import {progressBarSlice} from "../../app/reducers/ProgressBarSlice";
 
 const Props = () => {
@@ -22,7 +22,7 @@ const Props = () => {
     }
 
     const handleAddItem = () => {
-        const item: IItem = JSON.parse(itemsState)
+        const item: IProgressBarItem = JSON.parse(itemsState)
         dispatch(progressBarSlice.actions.addItem(item))
     }
     const handleChangeWidth = () => {

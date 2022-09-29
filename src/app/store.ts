@@ -1,8 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import progressBarReducer from "./reducers/ProgressBarSlice";
+import tableBarReducer from "./reducers/TableSlice"
 
 const rootReducer = combineReducers({
   progressBarReducer,
+  tableBarReducer
 })
 
 export const setupStore = () => {

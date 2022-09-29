@@ -1,9 +1,9 @@
-import {IItem} from "../Interfaces/IItem";
+import {IProgressBarItem} from "../Interfaces/IProgressBarItem";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 import {ICubic} from "../Interfaces/ICubic";
 
 interface progressBarState {
-    items: IItem[]
+    items: IProgressBarItem[]
     totalValue: number
     totalCubics: number
     cubicsArray: ICubic[]
@@ -37,7 +37,7 @@ export const progressBarSlice = createSlice({
         addItemToArray(state, action: PayloadAction<ICubic[]>) {
             state.cubicsArray = action.payload
         },
-        addItem(state, action: PayloadAction<IItem>) {
+        addItem(state, action: PayloadAction<IProgressBarItem>) {
             state.items = [...state.items, action.payload]
         },
         setWidth(state, action: PayloadAction<number>) {

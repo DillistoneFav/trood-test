@@ -1,18 +1,19 @@
 import React from 'react';
 import './App.css';
-import ProgressBar from "./features/ProgressBar/ProgressBar";
-
-import Props from "./features/Props/Props";
+import { BrowserRouter } from "react-router-dom";
+import Navbar from "./features/Navbar/Navbar";
+import AppRouter from "./features/Router/AppRouter";
 
 function App() {
 
 
   return (
-    <div className="App">
-        <h1>No validation there!</h1>
-        <Props/>
-        <ProgressBar/>
-    </div>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar/>
+          <AppRouter/>
+        </div>
+      </BrowserRouter>
   );
 }
 

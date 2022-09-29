@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import './ProgressBar.css'
 import {progressBarSlice} from "../../app/reducers/ProgressBarSlice";
@@ -8,8 +8,9 @@ const ProgressBar = () => {
     const dispatch = useAppDispatch()
     const {items, totalValue, cubicsArray, width, height} = useAppSelector(state => state.progressBarReducer)
     const sortedItems = [...items].sort((a,b) => a.value - b.value)
+
     const handleCreateBar = () => {
-        const sum = items.reduce((sum, currentValue) => {
+        const sum = sortedItems.reduce((sum, currentValue) => {
             return sum + currentValue.value
         }, 0)
         let countedCubics = Math.floor(width/22)
