@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Table.css'
 import {Button, Table} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
@@ -6,6 +6,7 @@ import {ITableItem} from "../../app/Interfaces/ITableItem";
 import {useAppSelector} from "../../app/hooks";
 import 'antd/dist/antd.css';
 import {useNavigate} from "react-router-dom";
+import {IFilters} from "../../app/Interfaces/IFilters";
 
 enum Colors {
     'green' = '#00FF00',
@@ -26,27 +27,27 @@ function getItemColor(itemStatus: string) {
     return Colors[itemStatus as keyof typeof Colors]
 }
 
+function configureProjectTypeFilters(items: ITableItem[]) {
+    let filters: IFilters[] = [];
+    items.map(storeItem => {
+        let findState = filters.find(item => item.text === storeItem.type)
+        return !findState && filters.push({text: storeItem.type, value: storeItem.type})
+    })
+    return filters
+}
+
+function configureProjectStatusFilters() {
+    let filters: IFilters[] = [];
+    Object.keys(Colors).map(item => {
+        filters.push({text: item, value: item})
+    })
+    return filters
+}
+
 const TableComp = () => {
     const {items} = useAppSelector(state => state.tableBarReducer)
     const navigate = useNavigate()
     const [itemId, setItemId] = useState<number | null>(null)
-
-    const configureProjectStatusFilters = () => {
-        let filters: {text: string, value: string}[] = [];
-        Object.keys(Colors).map(item => {
-            filters.push({text: item, value: item})
-        })
-        return filters
-    }
-
-    const configureProjectTypeFilters = () => {
-        let filters: {text: string, value: string}[] = [];
-        items.map(storeItem => {
-            let findState = filters.find(item => item.text === storeItem.type)
-            return !findState && filters.push({text: storeItem.type, value: storeItem.type})
-        })
-        return filters
-    }
 
     const columns: ColumnsType<ITableItem> = [
         {
@@ -67,7 +68,7 @@ const TableComp = () => {
             dataIndex: 'type',
             key: 'tokenType',
             width: '1000px',
-            filters: configureProjectTypeFilters()!,
+            filters: configureProjectTypeFilters(items),
             onFilter: (value, record) => record.type.indexOf(String(value)) === 0,
             sorter: (a,b) => {
                 if (a.type > b.type) return 1
